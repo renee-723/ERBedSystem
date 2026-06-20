@@ -112,7 +112,7 @@ namespace ERBedSystem.Controllers
             //辦理成功，回傳200 OK
             return Ok(new
             {
-                Message = message,
+                Message = message, //回傳訊息
                 EncounterRecord = encounter
             });
         }
