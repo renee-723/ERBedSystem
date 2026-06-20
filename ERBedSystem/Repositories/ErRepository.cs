@@ -1,0 +1,68 @@
+﻿using ERBedSystem.Data;
+using ERBedSystem.Models;
+
+namespace ERBedSystem.Repositories
+{
+    public class ErRepository
+    {
+        private readonly ErDbContext _context;
+
+        public ErRepository(ErDbContext context)
+        {
+            _context = context;
+        }
+
+        public List<Bed> GetAllBeds()
+        {
+            return _context.Beds.ToList();
+        }
+
+        public Patient GetWaitingPatient(string patientId)
+        {
+            return _context.Patients.FirstOrDefault(p => p.Id == patientId && p.Status == "Waiting");
+        }
+
+        public Bed GetAvailableIcuBed()
+        {
+            return _context.Beds.FirstOrDefault(b => b.Zone == "ICU" && b.Status == "Available");
+        }
+
+        public Bed GetAvailableWardOrPedsBed()
+        {
+            return _context.Beds.FirstOrDefault(b => (b.Zone == "Ward" || b.Zone == "Peds") && b.Status == "Available");
+        }
+
+        // 根據病人 ID，把「已經躺床（Bedded）」的病人撈出來辦出院
+        public Patient GetBeddedPatient(string patientId)
+        {
+            return _context.Patients.FirstOrDefault(p => p.Id == patientId && p.Status == "Bedded");
+        }
+        // 根據病人 ID，撈出他「正在進行中、尚未蓋上結束時間」的就醫紀錄
+        public Encounter GetActiveEncounter(string patientId)
+        {
+            return _context.Encounters.FirstOrDefault(e => e.PatientId == patientId && e.EndTime == null);
+        }
+
+        // 根據床號，精準撈出被追蹤的病床物件
+        public Bed GetBedById(string bedId)
+        {
+            return _context.Beds.FirstOrDefault(b => b.Id == bedId);
+        }
+
+        ////更新床位資訊
+        //public void UpdateBed(Bed bed)
+        //{
+        //    _context.Beds.Update(bed);
+        //}
+
+        public void AddEncounter(Encounter encounter)
+        {
+            _context.Encounters.Add(encounter);
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+    }
+}

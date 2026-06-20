@@ -1,0 +1,6 @@
+@ERBedSystem_HostAddress = http://localhost:5107
+
+GET {{ERBedSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
