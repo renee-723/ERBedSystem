@@ -66,7 +66,7 @@ namespace ERBedSystem.Services
                 return null;
             }
 
-            targetBed.Status = "Occupied";
+            targetBed.Status = BedStatus.Occupied;
             patient.Status = "Bedded";
 
             var newEncounter = new Encounter
@@ -111,7 +111,7 @@ namespace ERBedSystem.Services
             var targetBed = _repo.GetBedById(encounter.BedId);
             if (targetBed != null)
             {
-                targetBed.Status = "Available";
+                targetBed.Status = BedStatus.Available;
             }
 
             patient.Status = "Discharged"; //病人狀態改為已出院

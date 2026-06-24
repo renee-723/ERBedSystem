@@ -25,11 +25,11 @@ namespace ERBedSystem.Data
             // 1. 灌入初始病床資料
             modelBuilder.Entity<Bed>().HasData
               (
-               new Bed { Id = "ICU-01", Zone = "ICU", Status = "Available", Description = "靠近護理站，有生理監視器" },
-               new Bed { Id = "ICU-02", Zone = "ICU", Status = "Occupied", Description = "葉克膜專用床" },
-               new Bed { Id = "ER-A01", Zone = "Ward", Status = "Available", Description = "留觀 A 區靠窗" },
-               new Bed { Id = "ER-A02", Zone = "Ward", Status = "Cleaning", Description = "留觀 A 區，剛出院消毒中" },
-               new Bed { Id = "PEDS-01", Zone = "Peds", Status = "Available", Description = "兒科急診獨立隔離床" }
+               new Bed { Id = "ICU-01", Zone = "ICU", Status = BedStatus.Available, Description = "靠近護理站，有生理監視器" },
+               new Bed { Id = "ICU-02", Zone = "ICU", Status = BedStatus.Occupied, Description = "葉克膜專用床" },
+               new Bed { Id = "ER-A01", Zone = "Ward", Status = BedStatus.Available, Description = "留觀 A 區靠窗" },
+               new Bed { Id = "ER-A02", Zone = "Ward", Status = BedStatus.Cleaning, Description = "留觀 A 區，剛出院消毒中" },
+               new Bed { Id = "PEDS-01", Zone = "Peds", Status = BedStatus.Available, Description = "兒科急診獨立隔離床" }
               );
             // 2. 灌入初始病人資料
             modelBuilder.Entity<Patient>().HasData
