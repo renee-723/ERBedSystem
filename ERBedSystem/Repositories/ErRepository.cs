@@ -22,14 +22,24 @@ namespace ERBedSystem.Repositories
             return _context.Patients.FirstOrDefault(p => p.Id == patientId && p.Status == "Waiting");
         }
 
-        public Bed GetAvailableIcuBed()
+        public Bed GetAvailableIcuBed() //取得可用icu床
         {
             return _context.Beds.FirstOrDefault(b => b.Zone == "ICU" && b.Status == "Available");
         }
 
-        public Bed GetAvailableWardOrPedsBed()
+        //public Bed GetAvailableWardOrPedsBed()  //取得可用病床或是兒科床
+        //{
+        //    return _context.Beds.FirstOrDefault(b => (b.Zone == "Ward" || b.Zone == "Peds") && b.Status == "Available");
+        //}
+       
+        public Bed GetAvailableWardBed()  // 撈取一張可用的「成人留觀床」
         {
-            return _context.Beds.FirstOrDefault(b => (b.Zone == "Ward" || b.Zone == "Peds") && b.Status == "Available");
+            return _context.Beds.FirstOrDefault(b => b.Zone == "Ward" && b.Status == "Available");
+        }
+
+        public Bed GetAvailablePedsBed() // 撈取一張可用的「兒科留觀床」
+        {
+            return _context.Beds.FirstOrDefault(b => b.Zone == "Peds" && b.Status == "Available");
         }
 
         // 根據病人 ID，把「已經躺床（Bedded）」的病人撈出來辦出院

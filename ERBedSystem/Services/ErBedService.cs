@@ -31,8 +31,6 @@ namespace ERBedSystem.Services
             }
 
             Bed targetBed = null;
-
-            
             //檢傷邏輯演算法
             if(patient.TriageLevel <= 2)
             {
@@ -40,12 +38,31 @@ namespace ERBedSystem.Services
             }
             else
             {
-                targetBed=_repo.GetAvailableWardOrPedsBed();
+                if(patient.Age < 18)
+                {
+                    targetBed= _repo.GetAvailablePedsBed();
+
+                    if(targetBed == null)
+                    {
+                        targetBed=_repo.GetAvailableWardBed();
+                        if(targetBed != null)
+                        {
+                            message = "【臨床調度】因兒科床位全滿，啟動替代機制引導至一般留觀床。";
+                        }
+                    }
+                }
+                else
+                {
+                    targetBed = _repo.GetAvailableWardBed();
+                }
+                
             }
 
             if (targetBed == null)
             {
-                message = $"目前急診無空床!查無符合檢傷級數{patient.TriageLevel}的病床";
+                //message = $"目前急診無空床!查無符合檢傷級數{patient.TriageLevel}的病床";
+                isSuccess = false;
+                message = $"【滿床警告】目前急診大爆滿！查無適合病人 (年齡:{patient.Age}歲/檢傷:{patient.TriageLevel}級) 的可用空床，已安排於候診區等待。";
                 return null;
             }
 
@@ -91,7 +108,7 @@ namespace ERBedSystem.Services
             //查完就醫紀錄後，把正在使用的床一起撈出來
             //var beds = _repo.GetAllBeds();
             //var targetBed = beds.FirstOrDefault(b => b.Id == encounter.BedId);
-            var targetBed = _repo.GetBedById(encounter.Id);
+            var targetBed = _repo.GetBedById(encounter.BedId);
             if (targetBed != null)
             {
                 targetBed.Status = "Available";

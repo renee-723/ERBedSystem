@@ -8,6 +8,8 @@
         //姓名
         public string Name { get; set; }
 
+        public int Age { get; set; }
+
         //檢傷級數
         public int TriageLevel {  get; set; }
 
