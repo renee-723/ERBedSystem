@@ -4,6 +4,8 @@ using ERBedSystem.Repositories;
 using ERBedSystem.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace ERBedSystem.Controllers
 {
@@ -116,6 +118,17 @@ namespace ERBedSystem.Controllers
                 EncounterRecord = encounter
             });
         }
+        [HttpGet("complete-cleaning")]
+        public IActionResult CompleteCleaning([FromQuery] string bedId)
+        {
+            bool isSuccess = _bedService.CompleteBedCleaning(bedId, out string message);
+            if (!isSuccess)
+            {
+                return BadRequest(message);   //回傳400錯誤
+            }
+            return Ok(message);  //回傳200 ok
+        }
+
     }
 }
 

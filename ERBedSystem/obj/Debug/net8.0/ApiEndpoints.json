@@ -27,6 +27,22 @@
   },
   {
     "ContainingType": "ERBedSystem.Controllers.ErBedController",
+    "Method": "CompleteCleaning",
+    "RelativePath": "api/ErBed/complete-cleaning",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bedId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERBedSystem.Controllers.ErBedController",
     "Method": "DischargePatient",
     "RelativePath": "api/ErBed/discharge",
     "HttpMethod": "GET",

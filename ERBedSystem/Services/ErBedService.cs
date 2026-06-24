@@ -111,17 +111,44 @@ namespace ERBedSystem.Services
             var targetBed = _repo.GetBedById(encounter.BedId);
             if (targetBed != null)
             {
-                targetBed.Status = BedStatus.Available;
+                targetBed.Status = BedStatus.Cleaning;
             }
+            else
+            {
+                message= $"【警告】病人已辦理出院，但在資料庫中找不到對應的 [{encounter.BedId}] 號病床，請手動確認。";
+            }
+        
 
             patient.Status = "Discharged"; //病人狀態改為已出院
             encounter.EndTime = DateTime.Now; //改上出院時間
             _repo.SaveChanges(); //存檔
             
             isSuccess=true;
-            message=$"【出院成功】病人 [{patient.Name}] 已辦理出院，順利釋放 [{encounter.BedId}] 號病床！";
+            message= $"【出院成功】病人 [{patient.Name}] 已辦理出院！目前 [{encounter.BedId}] 號病床已切換為【清潔中】狀態，請通知清消人員。";
 
             return encounter;
+        }
+
+        //完成清消並讓床位恢復可用狀態
+        public bool CompleteBedCleaning(string bedId , out string message)
+        {
+            message = " ";
+            var bed = _repo.GetBedById(bedId);
+            if(bed == null)
+            {
+                message = $"找不到床號為{bedId}的床位";
+                return false;
+            }
+            if(bed.Status != BedStatus.Cleaning)
+            {
+                message = $"病床[{bedId}]目前狀態為{bed.Status}，不需執行清消";
+                return false;
+            }
+            bed.Status = BedStatus.Available;
+            _repo.SaveChanges();
+
+            message = $"[清消完成]病床[{bedId}]已完成清潔消毒，恢復為可使用空床";
+            return true;
         }
     }
 }
