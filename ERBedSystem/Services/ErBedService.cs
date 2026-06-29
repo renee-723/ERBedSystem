@@ -1,5 +1,6 @@
 ﻿using ERBedSystem.Models;
 using ERBedSystem.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Cryptography.X509Certificates;
 
@@ -21,6 +22,21 @@ namespace ERBedSystem.Services
         public Patient GetPatient(string patientId)
         {
             return _repo.GetPatientById(patientId);
+        }
+
+        //新增病人
+        public bool CreatePatient(Patient patient,out string message)
+        {
+            message = " ";
+            if(_repo.GetPatientById(patient.Id) != null)
+            {
+                message = "該病歷號已存在，無法重複建立";
+                return false;
+            }
+            patient.Status = "Waiting";
+            _repo.AddPatient(patient);
+            message = "病人建立成功";
+            return true;
         }
         //自動派床演算法
         public Encounter AssignBed(string patientId , out string message , out bool isSuccess)

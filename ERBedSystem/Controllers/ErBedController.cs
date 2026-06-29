@@ -101,6 +101,21 @@ namespace ERBedSystem.Controllers
             //_repo.SaveChanges();
 
         }
+        //新增病人
+        [HttpPost("patient")]
+        public IActionResult CreatPatient([FromBody]Patient patient)
+        {
+            if(patient == null || string.IsNullOrEmpty(patient.Id))
+            {
+                return BadRequest("病人資料不得為空且必須包含病歷號");
+            }
+            bool isSuccess = _bedService.CreatePatient(patient, out string message);
+            if (!isSuccess)
+            {
+                return BadRequest(message);
+            }
+            return Ok(new { message, patient });
+        }
         //查詢病人
         [HttpGet("patient/{patientId}")]
         public IActionResult GetPatient(string patientId)

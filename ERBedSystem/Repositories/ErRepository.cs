@@ -17,6 +17,13 @@ namespace ERBedSystem.Repositories
             return _context.Beds.ToList();
         }
 
+        //新增病人
+        public void AddPatient(Patient patient)
+        {
+            _context.Patients.Add(patient);
+            _context.SaveChanges();
+        }
+
         public Patient GetWaitingPatient(string patientId)   //正在等待配床的病人
         {
             return _context.Patients.FirstOrDefault(p => p.Id == patientId && p.Status == "Waiting");

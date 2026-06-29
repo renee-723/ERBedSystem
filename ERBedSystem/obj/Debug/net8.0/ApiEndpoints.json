@@ -59,6 +59,22 @@
   },
   {
     "ContainingType": "ERBedSystem.Controllers.ErBedController",
+    "Method": "CreatPatient",
+    "RelativePath": "api/ErBed/patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patient",
+        "Type": "ERBedSystem.Models.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERBedSystem.Controllers.ErBedController",
     "Method": "GetPatient",
     "RelativePath": "api/ErBed/patient/{patientId}",
     "HttpMethod": "GET",
