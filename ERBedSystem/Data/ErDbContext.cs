@@ -14,7 +14,7 @@ namespace ERBedSystem.Data
         public DbSet<Bed> Beds { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Encounter> Encounters { get; set; }
-
+        public DbSet<AuditLog> AuditLogs { get; set; }  
 
         // ==========================================
         // 【全新加入】當資料庫建立時，順便播下初始資料的種子
@@ -40,5 +40,6 @@ namespace ERBedSystem.Data
 
               );
         }
+      
     }
 }

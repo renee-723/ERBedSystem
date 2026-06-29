@@ -88,6 +88,10 @@ namespace ERBedSystem.Repositories
                 .OrderByDescending(e => e.EndTime) //找出最後一次
                 .FirstOrDefault();
         }
+        public void AddLog(AuditLog log)
+        {
+            _context.AuditLogs.Add(log);
+        }
         public void SaveChanges()
         {
             _context.SaveChanges();

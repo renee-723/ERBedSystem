@@ -194,6 +194,13 @@ namespace ERBedSystem.Services
             //恢復病人出院前狀態
             patient.Status = "Bedded";
             encounter.EndTime = null; //清除出院時間
+            //加入稽核日記
+            _repo.AddLog(new AuditLog {
+                Operation = "UndoDischarge",
+                PatientId = patientId,
+                Message = $"使用者撤銷了病人{patientId}的出院狀態"
+            });
+
             //床位拉回
             var targetBed = _repo.GetBedById(encounter.BedId);
             if(targetBed != null)
