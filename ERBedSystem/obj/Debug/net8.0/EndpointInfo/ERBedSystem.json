@@ -1,0 +1,112 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "ERBedSystem",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/ErBed": {
+      "get": {
+        "tags": [
+          "ErBed"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ErBed/auto-assign": {
+      "get": {
+        "tags": [
+          "ErBed"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ErBed/patient/{patientId}": {
+      "get": {
+        "tags": [
+          "ErBed"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ErBed/discharge": {
+      "get": {
+        "tags": [
+          "ErBed"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ErBed/complete-cleaning": {
+      "get": {
+        "tags": [
+          "ErBed"
+        ],
+        "parameters": [
+          {
+            "name": "bedId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": { },
+  "tags": [
+    {
+      "name": "ErBed"
+    }
+  ]
+}

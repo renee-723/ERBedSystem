@@ -17,7 +17,7 @@ namespace ERBedSystem.Repositories
             return _context.Beds.ToList();
         }
 
-        public Patient GetWaitingPatient(string patientId)
+        public Patient GetWaitingPatient(string patientId)   //正在等待配床的病人
         {
             return _context.Patients.FirstOrDefault(p => p.Id == patientId && p.Status == "Waiting");
         }
@@ -32,7 +32,7 @@ namespace ERBedSystem.Repositories
         //    return _context.Beds.FirstOrDefault(b => (b.Zone == "Ward" || b.Zone == "Peds") && b.Status == "Available");
         //}
        
-        public Bed GetAvailableWardBed()  // 撈取一張可用的「成人留觀床」
+        public Bed GetAvailableWardBed()  // 找出一張可用的「成人留觀床」
         {
             return _context.Beds.FirstOrDefault(b => b.Zone == "Ward" && b.Status == BedStatus.Available);
         }
@@ -64,8 +64,13 @@ namespace ERBedSystem.Repositories
         //{
         //    _context.Beds.Update(bed);
         //}
-
-        public void AddEncounter(Encounter encounter)
+            
+        //用病歷號搜尋病人
+        public Patient GetPatientById(string patientId)
+        {
+            return _context.Patients.FirstOrDefault(p => p.Id == patientId);
+        }
+        public void AddEncounter(Encounter encounter)  //就醫紀錄(一次獨立的醫療服務事件)
         {
             _context.Encounters.Add(encounter);
         }

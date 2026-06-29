@@ -17,6 +17,11 @@ namespace ERBedSystem.Services
         {
             return _repo.GetAllBeds();
         }
+        //用病歷號找病人
+        public Patient GetPatient(string patientId)
+        {
+            return _repo.GetPatientById(patientId);
+        }
         //自動派床演算法
         public Encounter AssignBed(string patientId , out string message , out bool isSuccess)
         {

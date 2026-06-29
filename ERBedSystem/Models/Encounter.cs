@@ -2,7 +2,7 @@
 
 namespace ERBedSystem.Models
 {
-    public class Encounter
+    public class Encounter  //就醫紀錄(一次獨立的醫療服務事件)
     {
         //健保卡號
         public string Id {  get; set; }

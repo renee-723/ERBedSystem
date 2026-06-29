@@ -62,6 +62,11 @@ namespace ERBedSystem.Controllers
                 return BadRequest(message);
             }
 
+            return Ok(new
+            {
+                Message = message,
+                EncounterRecord =encounter
+            });
             ////檢傷級數分類
             //if (patient.TriageLevel <= 2)
             //{
@@ -95,11 +100,17 @@ namespace ERBedSystem.Controllers
             //_repo.AddEncounter(newEncounter);
             //_repo.SaveChanges();
 
-            return Ok(new
+        }
+        //查詢病人
+        [HttpGet("patient/{patientId}")]
+        public IActionResult GetPatient(string patientId)
+        {
+            var patient = _bedService.GetPatient(patientId);
+            if (patient == null)
             {
-                Message = message,
-                EncounterRecord =encounter
-            });
+                return NotFound($"查無此病歷號[{patientId}]的病人資料");
+            }
+            return Ok(patient);
         }
         //辦理病人出院並釋出床位(POST api/erbed/discharge)
         [HttpGet("discharge")]
