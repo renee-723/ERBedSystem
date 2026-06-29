@@ -144,7 +144,8 @@ namespace ERBedSystem.Controllers
                 EncounterRecord = encounter
             });
         }
-        [HttpGet("complete-cleaning")]
+        //清床
+        [HttpPut("complete-cleaning")]
         public IActionResult CompleteCleaning([FromQuery] string bedId)
         {
             bool isSuccess = _bedService.CompleteBedCleaning(bedId, out string message);
@@ -153,6 +154,15 @@ namespace ERBedSystem.Controllers
                 return BadRequest(message);   //回傳400錯誤
             }
             return Ok(message);  //回傳200 ok
+        }
+        //取消病人出院
+        [HttpPut("patient/{patientId}/undo-discharge")]
+        public IActionResult UndoDischarge(string patientId)
+        {
+            bool isSuccess = _bedService.UndoDischarge(patientId, out string message);
+            if(!isSuccess) return BadRequest(message);
+
+            return Ok(message);
         }
 
     }

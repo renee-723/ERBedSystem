@@ -171,5 +171,38 @@ namespace ERBedSystem.Services
             message = $"[清消完成]病床[{bedId}]已完成清潔消毒，恢復為可使用空床";
             return true;
         }
+
+        //把病人從已出院拉回(誤把病人辦理出院)
+        public bool UndoDischarge(string patientId,out string message)
+        {
+            message = "";
+            //找到病人的最後一次出院紀錄
+            var patient = _repo.GetPatientById(patientId);
+            var encounter = _repo.GetLsatEncounter(patientId);
+            if(encounter == null ||encounter.EndTime == null)
+            {
+                message = "查無已出院紀錄，無法執行撤銷";
+                return false;
+            }
+            //檢查離院時間是否超過一小時
+            TimeSpan duration = DateTime.Now - encounter.EndTime.Value;
+            if (duration.TotalHours > 1)
+            {
+                message = ("病人出院已超過一小時，請進行重新掛號");
+                return false;
+            }
+            //恢復病人出院前狀態
+            patient.Status = "Bedded";
+            encounter.EndTime = null; //清除出院時間
+            //床位拉回
+            var targetBed = _repo.GetBedById(encounter.BedId);
+            if(targetBed != null)
+            {
+                targetBed.Status = BedStatus.Occupied;
+            }
+            _repo.SaveChanges();
+            message = $"撤銷出院成功!病人{patient.Name}資料已拉回，床位{encounter.BedId}已重新占用";
+            return true;
+        }
     }
 }

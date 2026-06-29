@@ -113,7 +113,7 @@
       }
     },
     "/api/ErBed/complete-cleaning": {
-      "get": {
+      "put": {
         "tags": [
           "ErBed"
         ],
@@ -121,6 +121,28 @@
           {
             "name": "bedId",
             "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ErBed/patient/{patientId}/undo-discharge": {
+      "put": {
+        "tags": [
+          "ErBed"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string"
             }

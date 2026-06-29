@@ -81,7 +81,13 @@ namespace ERBedSystem.Repositories
         {
             _context.Encounters.Add(encounter);
         }
-
+        public Encounter GetLsatEncounter(string patientId)
+        {
+            return _context.Encounters
+                .Where(e => e.PatientId == patientId)
+                .OrderByDescending(e => e.EndTime) //找出最後一次
+                .FirstOrDefault();
+        }
         public void SaveChanges()
         {
             _context.SaveChanges();

@@ -29,7 +29,7 @@
     "ContainingType": "ERBedSystem.Controllers.ErBedController",
     "Method": "CompleteCleaning",
     "RelativePath": "api/ErBed/complete-cleaning",
-    "HttpMethod": "GET",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -78,6 +78,22 @@
     "Method": "GetPatient",
     "RelativePath": "api/ErBed/patient/{patientId}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERBedSystem.Controllers.ErBedController",
+    "Method": "UndoDischarge",
+    "RelativePath": "api/ErBed/patient/{patientId}/undo-discharge",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
