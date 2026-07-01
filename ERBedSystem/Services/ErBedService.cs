@@ -23,6 +23,24 @@ namespace ERBedSystem.Services
         {
             return _repo.GetPatientById(patientId);
         }
+        //新增病床數量
+        public void CreateBed(Bed bed)
+        {
+            // 設定預設值：如果沒有指定狀態，預設為空床 (Available)
+            // 因Bed.Status 是 BedStatus 枚舉型態，直接賦值即可
+            if (bed.Status == 0 && string.IsNullOrEmpty(bed.Zone))
+            {
+                bed.Status = BedStatus.Available;
+            }
+            _repo.AddBed(bed);
+        }
+        //檢查病床是否已經存在
+        public bool BedExists(string bedId)
+        {
+            return _repo.BedExists(bedId);
+        }
+
+
 
         //新增病人
         public bool CreatePatient(Patient patient,out string message)

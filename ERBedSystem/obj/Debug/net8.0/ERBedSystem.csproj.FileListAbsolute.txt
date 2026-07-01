@@ -135,3 +135,4 @@ C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\refint\ERBe
 C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\ERBedSystem.pdb
 C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\ERBedSystem.genruntimeconfig.cache
 C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\ref\ERBedSystem.dll
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

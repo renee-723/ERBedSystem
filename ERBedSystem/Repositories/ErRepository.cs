@@ -16,6 +16,16 @@ namespace ERBedSystem.Repositories
         {
             return _context.Beds.ToList();
         }
+        //新增病床數量
+        public bool BedExists(string bedId)
+        {
+            return _context.Beds.Any(b => b.Id == bedId);
+        }
+        public void AddBed(Bed bed)
+        {
+            _context.Beds.Add(bed);
+            _context.SaveChanges();
+        }
 
         //新增病人
         public void AddPatient(Patient patient)

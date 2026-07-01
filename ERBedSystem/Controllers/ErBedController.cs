@@ -15,10 +15,12 @@ namespace ERBedSystem.Controllers
     {
         //宣告私有的資料庫大管家欄位
         private readonly ErBedService _bedService;
+        private readonly ErRepository _repo;
         // 利用建構子注入（Constructor Injection），讓大樓在開機時把大管家送進來
-        public ErBedController(ErBedService bedService)
+        public ErBedController(ErBedService bedService, ErRepository repo)
         {
             _bedService = bedService;
+            _repo = repo;
         }
 
         //// 臨時記憶體急診室：模擬資料庫的靜態資料夾
@@ -100,6 +102,23 @@ namespace ERBedSystem.Controllers
             //_repo.AddEncounter(newEncounter);
             //_repo.SaveChanges();
 
+        }
+        //新增病床數量
+        [HttpPost("addBed")]
+        public IActionResult CreateBed([FromBody] Bed bed)
+        {
+            if (bed == null || string.IsNullOrEmpty(bed.Id))
+            {
+                return BadRequest("床位資料不完整，必須包含床位編號(Id)");
+            }
+            //檢查是否有重複的床位
+            if (_bedService.BedExists(bed.Id))
+            {
+                return BadRequest($"床位編號 [{bed.Id}] 已存在");
+            }
+            //執行新增
+            _bedService.CreateBed(bed);
+            return Ok(new { Message = "床位已新增成功", Bed = bed });
         }
         //新增病人
         [HttpPost("patient")]

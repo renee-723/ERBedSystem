@@ -11,6 +11,22 @@
   },
   {
     "ContainingType": "ERBedSystem.Controllers.ErBedController",
+    "Method": "CreateBed",
+    "RelativePath": "api/ErBed/addBed",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bed",
+        "Type": "ERBedSystem.Models.Bed",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERBedSystem.Controllers.ErBedController",
     "Method": "AutoAssignBed",
     "RelativePath": "api/ErBed/auto-assign",
     "HttpMethod": "GET",
