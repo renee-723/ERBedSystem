@@ -1,0 +1,43 @@
+﻿@page "/bed-dashboard"  
+@using ERBedSystem.Models
+@inject HttpClient Http
+
+<h3>急診床位儀表板</h3>
+
+@if (beds == null)
+{
+    <p>Loading.....</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>床位編號</th> 
+                <th>狀態</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var bed in beds)
+            {
+                <tr>
+                    <th>@bed.Id</th>
+                    <th>@bed.Status</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code{
+    //宣告一個容器，準備用來存放api撈回的資料列表
+    private List<Bed>? beds;
+
+    //當這個頁面載入時，自動觸發這段程式碼
+    protected override async Task OnInitializedAsync()
+    {
+        // 發送 GET 請求給 API，拿到資料後轉成 List<Bed> 裝進 beds 容器裡
+        // 這裡的網址必須是你後端 API 實際執行的網址
+        beds = await Http.GetFromJsonAsync<List<Bed>>("http://localhost:5107/api/ErBed");
+    }
+}
+

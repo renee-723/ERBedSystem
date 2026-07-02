@@ -1,0 +1,39 @@
+﻿@page "/bed-list"
+@using ERBedSystem.Models
+@inject HttpClient Http
+
+<h3>急診床位狀態</h3>
+@if (!string.IsNullOrEmpty(error))
+{
+    <p style="color:red">@error</p>
+}
+@if(beds == null)
+{
+    <p>Loading.....</p>
+}
+else
+{
+    <ul>
+        @foreach(var bed in beds)
+        {
+            <li>床位編號:@bed.Id - 狀態:@bed.Status</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Bed>? beds;
+    private string? error;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            beds = await Http.GetFromJsonAsync<List<Bed>>("http://localhost:5107/api/ErBed");
+        }
+        catch(Exception ex)
+        {
+            error = "連線失敗" + ex.Message;
+        }
+    }
+
+}

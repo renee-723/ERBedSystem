@@ -13,7 +13,11 @@ builder.Services.AddScoped<ERBedSystem.Services.ErBedService>();
 
 builder.Services.AddEndpointsApiExplorer(); // 確保 Swagger 能掃描到API
 builder.Services.AddSwaggerGen(); //加入swagger
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -22,7 +26,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 app.MapControllers();

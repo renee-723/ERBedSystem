@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "新增設定檔",
+    "Projects": [
+      {
+        "Path": "ERBedSystem.Web\\ERBedSystem.Web.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ERBedSystem\\ERBedSystem.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.csproj.AssemblyReference.cache
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.AssemblyInfoInputs.cache
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.AssemblyInfo.cs
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.sourcelink.json
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem.Dashboard\ERBedSystem.Dashboard\obj\Debug\net8.0\ERBedSystem.Dashboard.MvcApplicationPartsAssemblyInfo.cs
