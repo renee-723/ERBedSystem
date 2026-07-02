@@ -11,3 +11,5 @@ C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebas
 C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\reney\source\repos\ERBedSystem\ERBedSystem\obj\Debug\net8.0\staticwebassets.build.json

@@ -7,28 +7,40 @@
 {
     <p style="color:red">@error</p>
 }
-@if(beds == null)
+@if(groupedBeds == null ||groupedBeds.Count==0)
 {
     <p>Loading.....</p>
 }
 else
 {
-    <ul>
-        @foreach(var bed in beds)
-        {
-            <li>床位編號:@bed.Id - 狀態:@bed.Status</li>
-        }
-    </ul>
+    @foreach (var group in groupedBeds)
+    {
+        <h4 style="margin-top: 20px; color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 5px;">
+            區域: @group.Key
+        </h4>
+        <ul>
+            @foreach (var bed in group.Value)
+            {
+                <li>床位編號: @bed.Id - 狀態: @bed.Status</li>
+            }
+        </ul>
+    }
 }
 
 @code {
     private List<Bed>? beds;
     private string? error;
+    private Dictionary<string, List<Bed>> groupedBeds = new();
     protected override async Task OnInitializedAsync()
     {
         try
         {
             beds = await Http.GetFromJsonAsync<List<Bed>>("http://localhost:5107/api/ErBed");
+            if (beds != null)
+            {
+                groupedBeds = beds.GroupBy(b => b.Zone??"未分類")
+                                  .ToDictionary(g => g.Key, g => g.ToList());
+            }
         }
         catch(Exception ex)
         {
@@ -37,3 +49,4 @@ else
     }
 
 }
+
