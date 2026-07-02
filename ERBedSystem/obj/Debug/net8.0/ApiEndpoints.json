@@ -27,6 +27,16 @@
   },
   {
     "ContainingType": "ERBedSystem.Controllers.ErBedController",
+    "Method": "GetAllBedNumber",
+    "RelativePath": "api/ErBed/allBedsNumber",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERBedSystem.Controllers.ErBedController",
     "Method": "AutoAssignBed",
     "RelativePath": "api/ErBed/auto-assign",
     "HttpMethod": "GET",

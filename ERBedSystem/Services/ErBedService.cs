@@ -39,9 +39,17 @@ namespace ERBedSystem.Services
         {
             return _repo.BedExists(bedId);
         }
-
-
-
+        //計算總床數有多少
+        public object GetAllBedNumber()
+        {
+            var allBeds = _repo.GetAllBeds();
+            return new
+            {
+                Empty = allBeds.Count(b => b.Status == BedStatus.Available),
+                Occupied = allBeds.Count(b => b.Status == BedStatus.Occupied),
+                Cleaning = allBeds.Count(b=>b.Status==BedStatus.Cleaning)
+            };
+        }
         //新增病人
         public bool CreatePatient(Patient patient,out string message)
         {

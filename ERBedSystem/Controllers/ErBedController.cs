@@ -120,6 +120,14 @@ namespace ERBedSystem.Controllers
             _bedService.CreateBed(bed);
             return Ok(new { Message = "床位已新增成功", Bed = bed });
         }
+        //計算總床數有多少
+        [HttpGet("allBedsNumber")]
+        public IActionResult GetAllBedNumber()
+        {
+            var stats = _bedService.GetAllBedNumber();
+            return Ok(stats);
+        }
+
         //新增病人
         [HttpPost("patient")]
         public IActionResult CreatPatient([FromBody]Patient patient)

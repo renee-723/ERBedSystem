@@ -69,6 +69,18 @@
         }
       }
     },
+    "/api/ErBed/allBedsNumber": {
+      "get": {
+        "tags": [
+          "ErBed"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/ErBed/patient": {
       "post": {
         "tags": [
