@@ -13,5 +13,8 @@
 
         //床位備註(需靠近護理站，有血壓機，有幫浦)
         public string Description {  get; set; }
+        public string? PatientName {  get; set; }
+        //檢傷級數
+        public int TriageLevel {  get; set; }
     }
 }

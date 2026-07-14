@@ -218,6 +218,14 @@
           "description": {
             "type": "string",
             "nullable": true
+          },
+          "patientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "triageLevel": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

@@ -18,35 +18,58 @@ else
         <h4 style="margin-top: 20px; color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 5px;">
             區域: @group.Key
         </h4>
-        <ul>
+        <MudGrid>
             @foreach (var bed in group.Value)
             {
-                <li>床位編號: @bed.Id - 狀態: @bed.Status</li>
+                <MudItem xs="12" sm="6" md="4" lg="3">
+                    <MudPaper Class="pa-4" Elevation="3" Style="@GetStatusStyle(bed.Status)">
+                        <MudText Typo="Typo.h6">@bed.Id</MudText>
+                        <MudText>狀態: @bed.Status</MudText>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" 
+                                   OnClick="() => HandleAction(bed)" Class="mt-2">
+                            指派床位
+                        </MudButton>
+                    </MudPaper>
+                </MudItem>
             }
-        </ul>
+        </MudGrid>
     }
 }
 
 @code {
-    private List<Bed>? beds;
+    // private List<Bed>? beds;
     private string? error;
     private Dictionary<string, List<Bed>> groupedBeds = new();
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            beds = await Http.GetFromJsonAsync<List<Bed>>("http://localhost:5107/api/ErBed");
-            if (beds != null)
+            var result = await Http.GetFromJsonAsync<List<Bed>>("http://localhost:5107/api/ErBed");
+            if (result != null)
             {
-                groupedBeds = beds.GroupBy(b => b.Zone??"未分類")
-                                  .ToDictionary(g => g.Key, g => g.ToList());
+                groupedBeds = result.GroupBy(b => b.Zone ?? "未分類")
+                                    .ToDictionary(g => g.Key, g => g.ToList());
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            error = "連線失敗" + ex.Message;
+            error = "無法載入資料: " + ex.Message;
         }
     }
 
-}
+    // 簡單的狀態樣式邏輯
+    private string GetStatusStyle(BedStatus status) => status switch
+    {
+        BedStatus.Available => "border-left: 5px solid green;",
+        BedStatus.Occupied => "border-left: 5px solid red;",
+        BedStatus.Cleaning => "border-left: 5px solid yellow;",
+        _ => "border-left: 5px solid gray;"
+    };
 
+    private void HandleAction(Bed bed)
+    {
+        // 之後可以在這裡實作指派床位的 Modal
+        Console.WriteLine($"點擊了床位: {bed.Id}");
+    }
+
+}

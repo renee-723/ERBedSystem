@@ -23,7 +23,11 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ErDbContext>();
+    db.Database.EnsureCreated();
+}
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("AllowAll");
