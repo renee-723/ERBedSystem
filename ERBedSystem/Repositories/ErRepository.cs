@@ -75,6 +75,7 @@ namespace ERBedSystem.Repositories
         {
             return _context.Beds.FirstOrDefault(b => b.Id == bedId);
         }
+        
 
         ////更新床位資訊
         //public void UpdateBed(Bed bed)

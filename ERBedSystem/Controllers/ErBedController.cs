@@ -192,6 +192,14 @@ namespace ERBedSystem.Controllers
             return Ok(message);
         }
 
+        //轉床
+        [HttpPut("transfer")]
+        public IActionResult Transfer([FromBody] TransferRequest request)
+        {
+            bool success = _bedService.TransferPatient(request.PatientId, request.OldBedId, request.NewBedId, request.Reason, out string message);
+            if (!success) return BadRequest(message);
+            return Ok(message);
+        }
     }
 }
 

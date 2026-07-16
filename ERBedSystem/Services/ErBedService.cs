@@ -237,5 +237,38 @@ namespace ERBedSystem.Services
             message = $"撤銷出院成功!病人{patient.Name}資料已拉回，床位{encounter.BedId}已重新占用";
             return true;
         }
+
+        //轉床
+        public bool TransferPatient(string patientId,string oldBedId,string newBedId,string reason,out string message)
+        {
+            message = " ";
+            var patient = _repo.GetPatientById(patientId);
+            var oldBed = _repo.GetBedById(oldBedId);
+            var newBed = _repo.GetBedById(newBedId);
+
+            if (patient == null ||oldBed == null ||newBed == null)
+            {
+                message = "資料錯誤:病人或床位資訊不存在";
+                return false;
+            }
+            if(newBed.Status != BedStatus.Available)
+            {
+                message = "轉床失敗:目標床位非空床";
+                return false;
+            }
+            oldBed.Status = BedStatus.Cleaning;
+            newBed.Status = BedStatus.Occupied;
+            _repo.AddLog(new AuditLog
+            {
+                Operation = "Transfer",
+                PatientId = patientId,
+                Message = $"病人{patient.Name}從{oldBedId}轉至{newBedId}，原因:{reason}",
+                Timestamp = DateTime.Now
+            });
+
+            _repo.SaveChanges();
+            message = "轉床成功";
+            return true;
+        }
     }
 }

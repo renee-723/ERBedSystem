@@ -60,9 +60,9 @@ else
     // 簡單的狀態樣式邏輯
     private string GetStatusStyle(BedStatus status) => status switch
     {
-        BedStatus.Available => "border-left: 5px solid green;",
-        BedStatus.Occupied => "border-left: 5px solid red;",
-        BedStatus.Cleaning => "border-left: 5px solid yellow;",
+        BedStatus.Available => "border-left: 10px solid green;",
+        BedStatus.Occupied => "border-left: 10px solid red;",
+        BedStatus.Cleaning => "border-left: 10px solid yellow;",
         _ => "border-left: 5px solid gray;"
     };
 

@@ -130,5 +130,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERBedSystem.Controllers.ErBedController",
+    "Method": "Transfer",
+    "RelativePath": "api/ErBed/transfer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERBedSystem.Models.TransferRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
